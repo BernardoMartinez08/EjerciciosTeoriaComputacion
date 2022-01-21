@@ -10,7 +10,7 @@ bool Set::empty() {
 	return first == nullptr;
 }
 
-void Set::addNode(const char* _valor) {
+bool Set::addNode(const char* _valor) {
 	Node* nuevo = new Node(_valor, nullptr, nullptr);
 
 	if (empty())
@@ -19,6 +19,8 @@ void Set::addNode(const char* _valor) {
 		last = nuevo;
 		last->setNext(first);
 		first->setPrevious(last);
+		cout << "Elemento: " << _valor << " agregado!\n";
+		return true;
 	}
 	else
 	{
@@ -28,17 +30,24 @@ void Set::addNode(const char* _valor) {
 
 		last->setNext(first);
 		first->setPrevious(last);
+		cout << "Elemento: " << _valor << " agregado!\n";
+		return true;
 	}
 
-	cout << "Elemento agregado!\n";
+	cout << "Elemento: " << _valor << " no fue agregado!\n";
+	return false;
 }
 
-void Set::deleteNode(const char* _valor) {
+bool Set::deleteNode(const char* _valor) {
 	if (empty()) {
 		cout << "\nConjunto esta vacio!\n";
-		return;
+		return false;
 	}
-
+	else if (notBelong(_valor)) {
+		cout << "Elemento: " << _valor << " no encontrado en el conjunto!\n";
+		return false;
+	}
+	
 	Node* actual = first;
 	do {
 		if (strcmp(actual->getValue(), _valor) == 0) {
@@ -46,7 +55,6 @@ void Set::deleteNode(const char* _valor) {
 				first = actual->getNext();
 				first->setPrevious(last);
 				last->setNext(first);
-
 			}
 			else if (actual == last) {
 				last = last->getPrevious();
@@ -57,12 +65,14 @@ void Set::deleteNode(const char* _valor) {
 				actual->getPrevious()->setNext(actual->getNext());
 				actual->getNext()->setPrevious(actual->getPrevious());
 			}
-
-			delete actual;
-			return;
 		}
-		actual = actual->getNext();
+
+		actual = actual->getNext();;
+
 	} while (actual != first);
+
+	cout << "Elemento: " << _valor << " eliminado!\n";
+	return true;
 }
 
 void Set::print() {
@@ -78,5 +88,47 @@ void Set::print() {
 		actual = actual->getNext();
 	} while (actual != first);
 
-	cout << std::endl;
+	cout << "\n\n";
+}
+
+bool Set::belong(const char* _valor){
+	if (empty()) {
+		cout << "\nConjunto esta vacio!\n";
+		return false;
+	}
+
+	Node* actual = first;
+	do {
+		if (strcmp(actual->getValue(), _valor) == 0) {
+			cout << "Elemento: " << _valor << " pertenece al conjunto!\n";
+			return true;
+		}
+
+		actual = actual->getNext();;
+
+	} while (actual != first);
+
+	cout << "Elemento: " << _valor << " no pertenece al conjunto!\n";
+	return false;
+}
+
+bool Set::notBelong(const char* _valor) {
+	if (empty()) {
+		cout << "\nConjunto esta vacio!\n";
+		return true;
+	}
+
+	Node* actual = first;
+	do {
+		if (strcmp(actual->getValue(), _valor) == 0) {
+			cout << "Elemento: " << _valor << " pertenece al conjunto!\n";
+			return false;
+		}
+
+		actual = actual->getNext();;
+
+	} while (actual != first);
+
+	cout << "Elemento: " << _valor << " no pertenece al conjunto!\n";
+	return true;
 }

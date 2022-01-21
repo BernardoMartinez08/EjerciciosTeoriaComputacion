@@ -7,9 +7,11 @@
 class Set {
 public:
 	Set();
-	void addNode(const char*);
-	void deleteNode(const char*);
+	bool addNode(const char*);
+	bool deleteNode(const char*);
 	void print();
+	bool belong(const char*);
+	bool notBelong(const char*);
 private:
 	Node* first;
 	Node* last;
