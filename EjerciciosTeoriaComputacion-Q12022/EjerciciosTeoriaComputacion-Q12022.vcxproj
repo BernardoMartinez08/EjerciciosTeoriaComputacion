@@ -111,6 +111,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Conjunto.h" />
+    <ClInclude Include="NodoConjunto.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Conjunto.cpp" />
+    <ClCompile Include="NodoConjunto.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
