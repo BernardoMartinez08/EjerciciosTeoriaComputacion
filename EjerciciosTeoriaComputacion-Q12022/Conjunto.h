@@ -12,10 +12,12 @@ public:
 	void print();
 	bool belong(const char*);
 	bool notBelong(const char*);
+	bool equalTo(Set);
 private:
 	Node* first;
 	Node* last;
 
+	bool areEqual(Set, Set);
 	bool empty();
 };
 #endif // ! LISTACIRCULAR_H

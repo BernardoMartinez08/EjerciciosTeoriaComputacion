@@ -100,7 +100,6 @@ bool Set::belong(const char* _valor){
 	Node* actual = first;
 	do {
 		if (strcmp(actual->getValue(), _valor) == 0) {
-			cout << "Elemento: " << _valor << " pertenece al conjunto!\n";
 			return true;
 		}
 
@@ -108,7 +107,6 @@ bool Set::belong(const char* _valor){
 
 	} while (actual != first);
 
-	cout << "Elemento: " << _valor << " no pertenece al conjunto!\n";
 	return false;
 }
 
@@ -121,7 +119,6 @@ bool Set::notBelong(const char* _valor) {
 	Node* actual = first;
 	do {
 		if (strcmp(actual->getValue(), _valor) == 0) {
-			cout << "Elemento: " << _valor << " pertenece al conjunto!\n";
 			return false;
 		}
 
@@ -129,6 +126,47 @@ bool Set::notBelong(const char* _valor) {
 
 	} while (actual != first);
 
-	cout << "Elemento: " << _valor << " no pertenece al conjunto!\n";
+	return true;
+}
+
+bool Set::areEqual(Set _setX, Set _setY)
+{
+	Node* actual = _setX.first;
+	do {
+		if (_setY.notBelong(actual->getValue()) == true) {
+			return false;
+		}
+
+		actual = actual->getNext();;
+
+	} while (actual != _setX.first);
+
+	return true;
+}
+
+bool Set::equalTo(Set _set)
+{
+	if (empty() && _set.empty()) {
+		cout << "\nConjuntos estan vacios!\n";
+		cout << "Los Conjuntos son Iguales\n";
+		return true;
+	}
+	else if (empty()) {
+		cout << "\nConjunto 1 esta vacio!\n";
+		cout << "Los Conjuntos no son Iguales\n";
+		return false;
+	}
+	else if (_set.empty()) {
+		cout << "\nConjunto 2 esta vacio!\n";
+		cout << "Los Conjuntos no son Iguales\n";
+		return false;
+	}
+
+	if (!areEqual(*this, _set) || !areEqual(_set, *this)) {
+		cout << "Los Conjuntos no son Iguales\n";
+		return false;
+	}
+
+	cout << "Los Conjuntos son Iguales\n";
 	return true;
 }
