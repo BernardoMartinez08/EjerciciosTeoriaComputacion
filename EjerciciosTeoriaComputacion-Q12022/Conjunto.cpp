@@ -82,13 +82,16 @@ void Set::print() {
 	}
 
 	Node* actual = first;
-	cout << "\n";
+	cout << "\n{ ";
 	do {
-		cout << "[ " << actual->getValue() << " ] ";
+		if (actual != first)
+			cout << " , ";
+
+		cout << actual->getValue();
 		actual = actual->getNext();
 	} while (actual != first);
 
-	cout << "\n\n";
+	cout << "}\n\n";
 }
 
 bool Set::belong(const char* _valor){
