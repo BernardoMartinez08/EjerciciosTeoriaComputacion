@@ -77,7 +77,7 @@ bool Set::deleteNode(const char* _valor) {
 
 void Set::print() {
 	if (empty()) {
-		cout << "\nConjunto esta vacio!\n";
+		cout << "\n{ vacio }\n\n";
 		return;
 	}
 
@@ -172,4 +172,62 @@ bool Set::equalTo(Set _set)
 
 	cout << "Los Conjuntos son Iguales\n";
 	return true;
+}
+
+Set Set::unionSets(Set _set)
+{
+	Set resultado;
+	if (empty() && _set.empty()) {
+		cout << "\nConjuntos estan vacios!\n";
+		return resultado;
+	}
+	else if (empty()) {
+		cout << "\nConjunto 1 esta vacio!\n";
+		return _set;
+	}
+	else if (_set.empty()) {
+		cout << "\nConjunto 2 esta vacio!\n";
+		return *this;
+	}
+	else {
+		Set resultado;
+		Set aux;
+
+		resultado.first = this->first;
+		resultado.last = this->last;
+
+		aux.first = _set.first;
+		aux.last = _set.last;
+
+		resultado.first->setPrevious(aux.last);
+		resultado.last->setNext(aux.first);
+
+		aux.first->setPrevious(resultado.last);
+		aux.last->setNext(resultado.first);
+
+		return resultado;
+	}
+	return resultado;
+}
+
+Set Set::intersectSets(Set _set)
+{
+	Set resultado;
+
+	if (empty()) {
+		cout << "\nConjunto esta vacio!\n";
+		return resultado;
+	}
+
+	Node* actual = first;
+	do {
+		if (_set.belong(actual->getValue()) == true && resultado.notBelong(actual->getValue()) == true) {
+			resultado.addNode(actual->getValue());
+		}
+
+		actual = actual->getNext();;
+
+	} while (actual != first);
+
+	return resultado;
 }

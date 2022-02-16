@@ -9,10 +9,16 @@ public:
 	Set();
 	bool addNode(const char*);
 	bool deleteNode(const char*);
+
 	void print();
+
 	bool belong(const char*);
 	bool notBelong(const char*);
+
 	bool equalTo(Set);
+
+	Set unionSets(Set);
+	Set intersectSets(Set);
 private:
 	Node* first;
 	Node* last;

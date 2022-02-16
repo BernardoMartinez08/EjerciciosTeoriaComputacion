@@ -65,5 +65,39 @@ int main() {
 
 	X.equalTo(Y);
 
+
+	//Union
+	cout << "\n\nLa union del conjunto: \n";
+	X.print();
+	cout << "con el conjunto: \n";
+	Y.print();
+	Set Z = X.unionSets(Y);
+	cout << "Resulta en: \n";
+	Z.print();
+
+	X.print();
+	Y.print();
+	Z.print();
+
+
+	/*Set A;
+	cout << "\nLa union del conjunto: \n";
+	A.print();
+	cout << "con el conjunto: \n";
+	Y.print();
+	Set B = A.unionSets(A,Y);
+	cout << "Resulta en: \n";
+	B.print();*/
+
+
+	//Interseccion
+	cout << "\nLa interseccion del conjunto: \n";
+	X.print();
+	cout << "con el conjunto: \n";
+	Y.print();
+	Set W = X.intersectSets(Y);
+	cout << "Resulta en: \n";
+	W.print();
+
 	_getch();
 }
