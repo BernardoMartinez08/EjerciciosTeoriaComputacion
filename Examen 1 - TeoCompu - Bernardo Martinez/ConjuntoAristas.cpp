@@ -41,7 +41,7 @@ bool EdgesSet::add(const char* _valorX, const char* _valorY) {
 
 void EdgesSet::print() {
 	if (empty()) {
-		cout << "\n{ vacio }";
+		cout << "{ vacio }";
 		return;
 	}
 

@@ -11,21 +11,26 @@ using namespace std;
 
 class Graph {
 public:
-	Graph();
+	Graph(string);
+
+	void print();
+	void printAdjacencyMatrix();
+
+	void convert();
+
+private:
+	string rootGraph = "";
+
+	VertexSet* vertices;
+	EdgesSet* edges;
+	int** adjacencyMatrix;
+
 	void addVertex(const char*);
 	void addEdges(const char*, const char*);
 
 	void addVertexTag(const char*, const char*);
 
-	void print();
-
 	vector<vector<const char*>> getAdjacencyMatrix();
-	void printAdjacencyMatrix();
-
-private:
-	VertexSet* vertices;
-	EdgesSet* edges;
-	int** adjacencyMatrix;
 
 	int getVertexIndex(const char*);
 };

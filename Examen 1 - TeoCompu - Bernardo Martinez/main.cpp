@@ -15,7 +15,7 @@ int main() {
 
 	S.tagNode("7", "Mario");
 
-	S.print();*/
+	S.print();
 
 	Graph a;
 
@@ -33,8 +33,14 @@ int main() {
 	a.addEdges("D", "C");
 	a.print();
 
+	a.printAdjacencyMatrix();*/
+
+	string expresion = "{a,b,c,d},{(a,b),(b,c)}";
+	Graph a(expresion);
+
+	a.convert();
+	a.print();
 	a.printAdjacencyMatrix();
 
-	
 	_getch();
 }

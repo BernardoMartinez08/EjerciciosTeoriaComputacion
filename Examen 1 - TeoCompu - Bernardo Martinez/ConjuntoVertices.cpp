@@ -42,7 +42,7 @@ bool VertexSet::add(const char* _valor) {
 
 void VertexSet::print() {
 	if (empty()) {
-		cout << "\n{ vacio }";
+		cout << "{ vacio }";
 		return;
 	}
 

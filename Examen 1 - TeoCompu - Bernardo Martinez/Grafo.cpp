@@ -6,7 +6,8 @@ using std::cout;
 using std::endl;
 using std::setw;
 
-Graph::Graph(): vertices(nullptr), edges(nullptr), adjacencyMatrix(nullptr) {
+Graph::Graph(string _rootGraph): vertices(nullptr), edges(nullptr), adjacencyMatrix(nullptr) {
+	this->rootGraph = _rootGraph;
 }
 
 void Graph::addVertex(const char* _verticeID) {
@@ -82,6 +83,12 @@ void Graph::addVertexTag(const char* vertice, const char* tag)
 }
 
 void Graph::print() {
+	if (edges == nullptr)
+		edges = new EdgesSet();
+
+	if (vertices == nullptr)
+		vertices = new VertexSet();
+
 	int graphSize = vertices->size();
 
 	cout << "Grafo: \nG = ( ";
@@ -89,32 +96,37 @@ void Graph::print() {
 	cout << ", ";
 	edges->print();
 	cout << " )";
-
+	
 	cout << "\n\nAristas: \n";
-	cout << setw(3) << " ";
+	if (vertices->size() != 0 && edges->size() != 0) {
+		cout << setw(3) << " ";
 
-	Vertex* actual = vertices->getFirst();
-	do {
-		cout << setw(3) << " " << actual->getValue() << "  ";
-		actual = actual->getNext();
+		Vertex* actual = vertices->getFirst();
+		do {
+			cout << setw(3) << " " << actual->getValue() << "  ";
+			actual = actual->getNext();
 
-	} while (actual != vertices->getFirst());
-	cout << "\n";
+		} while (actual != vertices->getFirst());
+		cout << "\n";
 
-	actual = vertices->getFirst();
-	int x = 0;
-	do {
-		cout << setw(3) << actual->getValue();
+		actual = vertices->getFirst();
+		int x = 0;
+		do {
+			cout << setw(3) << actual->getValue();
 
-		for (int i = 0; i < graphSize; i++) {
-			cout << setw(3) << "[ " << adjacencyMatrix[x][i] << " ]";
-		}
-		cout << endl;
+			for (int i = 0; i < graphSize; i++) {
+				cout << setw(3) << "[ " << adjacencyMatrix[x][i] << " ]";
+			}
+			cout << endl;
 
-		actual = actual->getNext();
+			actual = actual->getNext();
 
-		x++;
-	} while (actual != vertices->getFirst());
+			x++;
+		} while (actual != vertices->getFirst());
+	}
+	else {
+		cout << "\n[ empty ]";
+	}
 }
 
 int Graph::getVertexIndex(const char* _valor) {
@@ -167,18 +179,77 @@ void Graph::printAdjacencyMatrix() {
 	vertices->print();
 
 	cout << "\n\nConexiones: \n";
+	if (vertices->size() != 0 && edges->size() != 0) {
+		int x = 0;
+		Vertex* actual = vertices->getFirst();
+		do {
+			cout << setw(3) << actual->getValue() << "--->";
+			for (int i = 0; i < _lista[x].size(); i++) {
+				cout << setw(3) << "[ " << _lista[x][i] << " ]";
+			}
+			cout << endl;
 
-	int x = 0;
-	Vertex* actual = vertices->getFirst();
-	do {
-		cout << setw(3) << actual->getValue() << "--->";
-		for (int i = 0; i < _lista[x].size(); i++) {
-			cout << setw(3) << "[ " << _lista[x][i] << " ]";
+			x++;
+			actual = actual->getNext();;
+
+		} while (actual != vertices->getFirst());
+	}
+	else {
+		cout << "\n[ empty ]";
+	}
+}
+
+void Graph::convert() {
+	string campoAux = "";
+	bool fullVertex = false;
+
+	auto toString = [](char a) {
+		string s(1, a);
+		return s;
+	};
+
+	for (int i = 0; i < this->rootGraph.size(); i++) {		
+		if (fullVertex == false) {
+			if (toString(rootGraph[i]).compare("{") != 0 && toString(rootGraph[i]).compare(",") != 0) {
+				campoAux += rootGraph[i];
+
+				if (toString(rootGraph[i + 1]).compare("}") == 0) {
+					addVertex(campoAux.c_str());
+					campoAux = "";
+					fullVertex = true;
+					i++;
+				}
+			}
+			else if (toString(rootGraph[i]).compare(",") == 0 && campoAux.compare("") != 0) {
+				addVertex(campoAux.c_str());
+				campoAux = "";
+			}
+			
 		}
-		cout << endl;
+		else if (fullVertex == true) {
+			string valueX = "";
+			string valueY = "";
 
-		x++;
-		actual = actual->getNext();;
-
-	} while (actual != vertices->getFirst());
+			if (toString(rootGraph[i]).compare("{") != 0 && toString(rootGraph[i]).compare(",") != 0 && toString(rootGraph[i]).compare("}") != 0) {
+				for (int y = i; y < this->rootGraph.size(); y++) {
+					if (toString(rootGraph[i]).compare("(") != 0 && toString(rootGraph[i]).compare(",") != 0 && toString(rootGraph[i]).compare(")") != 0) {
+						campoAux += rootGraph[i];
+					}
+					else if (toString(rootGraph[i]).compare(")") == 0) {
+						valueY = campoAux;
+						campoAux = "";
+						break;
+					}
+					else if (toString(rootGraph[i]).compare(",") == 0 && campoAux.compare("") != 0) {
+						valueX = campoAux;
+						campoAux = "";
+					}
+					i++;
+				}
+				cout << "\nX: " << valueX << ", Y : " << valueY << "\n";
+				addEdges(valueX.c_str(), valueY.c_str());
+				campoAux = "";
+			}
+		}
+	}
 }
