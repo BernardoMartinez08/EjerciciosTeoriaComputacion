@@ -74,10 +74,7 @@ void VertexSet::print() {
 		if (actual != first)
 			cout << " , ";
 
-		if(actual->getTag() != nullptr)
-			cout << "( " << actual->getValue() << ", " << actual->getTag() << " )";
-		else
-			cout << "( " << actual->getValue() << ", " << "empty )";
+		cout << actual->getValue();
 
 		actual = actual->getNext();
 	} while (actual != first);
@@ -100,25 +97,4 @@ int VertexSet::size()
 	} while (actual != first);
 
 	return _size;
-}
-
-
-bool VertexSet::tag(const char* _valor, const char* _tag)
-{
-	if (empty()) {
-		return false;
-	}
-
-	Vertex* actual = first;
-	do {
-		if (strcmp(actual->getValue(), _valor) == 0) {
-			actual->setTag(_tag);
-			return true;
-		}
-
-		actual = actual->getNext();;
-
-	} while (actual != first);
-
-	return false;
 }

@@ -1,0 +1,1 @@
+({piedra,papel,tijera,lagartija,spock},{(tijera,papel),(tijera,lagartija),(papel,piedra),(papel,spock),(piedra,tijera),(piedra,lagartija),(lagartija,papel),(lagartija,spock),(spock,piedra),(spock,tijera)})

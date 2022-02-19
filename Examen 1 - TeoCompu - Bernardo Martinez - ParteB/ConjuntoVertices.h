@@ -13,8 +13,6 @@ public:
 	int size();
 
 	Vertex* getFirst();
-
-	bool tag(const char*, const char*);
 private:
 	Vertex* first;
 	Vertex* last;

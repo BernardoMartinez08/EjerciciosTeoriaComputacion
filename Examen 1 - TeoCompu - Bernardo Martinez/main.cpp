@@ -124,7 +124,7 @@ int main() {
 			break;
 
 		}case 3: {
-			cout << "\nS A  L I  E N D O.....\n";
+			cout << "\nS A L I E N D O.....\n";
 			break;
 		}default: {
 			cout << "\nOPCION NO VALIDA";
