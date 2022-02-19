@@ -16,7 +16,7 @@ public:
 	void print();
 	void printAdjacencyMatrix();
 
-	void convert();
+	bool addVertexTag(const char*, const char*);
 
 private:
 	string rootGraph = "";
@@ -28,11 +28,12 @@ private:
 	void addVertex(const char*);
 	void addEdges(const char*, const char*);
 
-	void addVertexTag(const char*, const char*);
-
 	vector<vector<const char*>> getAdjacencyMatrix();
 
 	int getVertexIndex(const char*);
+
+	void convert();
+	bool validar();
 };
 
 #endif // !GRAFO_H

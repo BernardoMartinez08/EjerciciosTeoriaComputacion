@@ -8,6 +8,11 @@ using std::setw;
 
 Graph::Graph(string _rootGraph): vertices(nullptr), edges(nullptr), adjacencyMatrix(nullptr) {
 	this->rootGraph = _rootGraph;
+
+	if (!validar())
+		this->rootGraph = "";
+
+	convert();
 }
 
 void Graph::addVertex(const char* _verticeID) {
@@ -76,10 +81,11 @@ void Graph::addEdges(const char* verticeOrigen, const char* verticeDestino) {
 	}
 }
 
-void Graph::addVertexTag(const char* vertice, const char* tag)
+bool Graph::addVertexTag(const char* vertice, const char* tag)
 {
 	if (vertices != nullptr)
-		vertices->tag(vertice, tag);
+		return vertices->tag(vertice, tag);
+	return false;
 }
 
 void Graph::print() {
@@ -91,7 +97,7 @@ void Graph::print() {
 
 	int graphSize = vertices->size();
 
-	cout << "Grafo: \nG = ( ";
+	cout << "\n\nGrafo: \nG = ( ";
 	vertices->print();
 	cout << ", ";
 	edges->print();
@@ -208,6 +214,9 @@ void Graph::convert() {
 		return s;
 	};
 
+	rootGraph.erase(rootGraph.begin());
+	rootGraph.erase(rootGraph.end());
+
 	for (int i = 0; i < this->rootGraph.size(); i++) {		
 		if (fullVertex == false) {
 			if (toString(rootGraph[i]).compare("{") != 0 && toString(rootGraph[i]).compare(",") != 0) {
@@ -246,10 +255,73 @@ void Graph::convert() {
 					}
 					i++;
 				}
-				cout << "\nX: " << valueX << ", Y : " << valueY << "\n";
 				addEdges(valueX.c_str(), valueY.c_str());
 				campoAux = "";
 			}
 		}
 	}
+}
+
+bool Graph::validar() {
+	auto toString = [](char a) {
+		string s(1, a);
+		return s;
+	};
+	
+	if (rootGraph.empty()) {
+		cout << "\nGrafo Vacio!!!*\n";
+		return false;
+	}
+
+	bool esValid = true;
+	bool llavesAbiertas = false;
+	bool parentesisAbiertos = false;
+	bool verticeValidos = false;
+	bool finVertices = false;
+
+	if (toString(rootGraph[0]).compare("(") != 0) {
+		cout << "\nFormato del Grafo Incorrecto debe iniciar con (!!!";
+		return false;
+	}
+	else if (toString(rootGraph[rootGraph.size() - 1]).compare(")") != 0) {
+		cout << "\nFormato del Grafo Incorrecto debe finalizar con )!!!";
+		return false;
+	}
+
+	for (int i = 0; i < rootGraph.size(); i++) {
+		if (toString(rootGraph[i]).compare("{") == 0) {
+			llavesAbiertas = true;
+		}
+		else if (toString(rootGraph[i]).compare("}") == 0) {
+			if (llavesAbiertas == true)
+				llavesAbiertas = false;
+			else
+				llavesAbiertas = true;
+
+			if (finVertices == false) {
+				verticeValidos = esValid;
+				finVertices = true;
+			}
+		}
+		else if (toString(rootGraph[i]).compare("(") == 0) {
+			llavesAbiertas = true;
+		}
+		else if (toString(rootGraph[i]).compare(")") == 0) {
+			if (parentesisAbiertos == true)
+				parentesisAbiertos = false;
+			else
+				parentesisAbiertos = true;
+		}
+		else if (toString(rootGraph[i]).compare(",") != 0) {
+			esValid = true;
+		}
+		else if (toString(rootGraph[i]).compare(",") == 0) {
+			esValid = false;
+		}
+	}
+	
+	if (parentesisAbiertos != true && llavesAbiertas != true || verticeValidos != false)
+		return esValid;
+	else
+		return false;
 }
