@@ -58,7 +58,7 @@ void EdgesSet::print() {
 		actual = actual->getNext();
 	} while (actual != first);
 
-	cout << "}";
+	cout << " }";
 }
 
 bool EdgesSet::belong(const char* _valorX, const char* _valorY) {

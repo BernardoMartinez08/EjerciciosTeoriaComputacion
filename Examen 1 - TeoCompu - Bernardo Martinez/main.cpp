@@ -89,8 +89,9 @@ string importGraph() {
 int main() {
 	int opcion = 0;
 
-	string instrucciones = "\n\nINSTRUCCIONES: Ingrese su grafo entre parentesis (), seguido de los conjuntos de vertices y aristas entre {}, seperados por coma ({},{})\n";
-	string ejemplos = "\n({1,2,3},{(1,3),(3,2)}) o ({a,b,c,d,e},{(a,b),(c,d),(a,c)})";
+	string instrucciones = "\n\nINSTRUCCIONES: Ingrese su grafo como se le pide acontinuacion, se le pediran los respectivos conjuntos de vertices y aristas entre {}\n";
+	string ejemplosVertices = "\n{1,2,3} o {a,b,c,d,e}";
+	string ejemplosAristas = "\n{(1,3),(3,2)} o {(a,b),(c,d),(a,c)}";
 
 	while (opcion != 3) {
 		cout << "\n\n\n********* M E N U  P R I N C  I P A L *********\n\n";
@@ -107,7 +108,7 @@ int main() {
 			cout << "\n\n********* I M P O R T A N D O  G R A F O *********\n";
 
 			string grafo;
-			cout << instrucciones << ejemplos;
+			cout << "Importando el grafo del archivo, solo se aceptan grafos en el formato ({V},{E})";
 			grafo = importGraph();
 
 			menuSecundario(grafo);
@@ -116,10 +117,15 @@ int main() {
 		}case 2: {
 			cout << "\n\n********* I N G R E S A N D O  G R A F O *********\n";
 
-			string grafo;
-			cout << "\n\n" << instrucciones << ejemplos << "\n\nIngrese el grafo en el formato anterior descrito: ";
-			cin >> grafo;
+			string grafoVertices;
+			cout << "\n\n" << instrucciones << ejemplosVertices << "\n\nIngrese el conjunto de VERTICES correspondiente al grafo en el formato anterior descrito: \n";
+			cin >> grafoVertices;
 
+			string grafoAristas;
+			cout << "\n\n" << ejemplosAristas << "\n\nIngrese el conjunto de ARISTAS correspondiente al grafo en el formato anterior descrito: \n";
+			cin >> grafoAristas;
+
+			string grafo = "(" + grafoVertices + "," + grafoAristas + ")";
 			menuSecundario(grafo);
 			break;
 

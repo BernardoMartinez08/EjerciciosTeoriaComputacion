@@ -57,13 +57,46 @@ int main() {
 			cout << "\n\nInstrucciones: a continuacion se le pedira que seleccione la jugada para cada uno de los jugadores.\nSeleccione el numero que acompaña la opcion que desea seleccionar.";
 			cout << "\n\nOpciones a Jugar:\n" << opcionesJuego;
 
-			int jugador1;
-			cout << "\n\nIngrese la jugada del Jugador 1: ";
-			cin >> jugador1;
+			bool isValid = false;
 
+			int jugador1;
+			while (isValid == false) {
+				cout << "\n\nIngrese la jugada del Jugador 1: ";
+				cin >> jugador1;
+
+				switch (jugador1)
+				{
+				case 1: case 2: case 3: case 4: case 5: {
+					isValid = true;
+					break;
+				}
+				default: {
+					cout << "\n\nJugada no valida para JUGADOR 1, intente nuevamente con una de las opciones posibles.";
+					break;
+
+				}
+				}
+			}
+
+			isValid = false;
 			int jugador2;
-			cout << "\n\nIngrese la jugada del Jugador 2: ";
-			cin >> jugador2;
+			while (isValid == false) {
+				cout << "\n\nIngrese la jugada del Jugador 2: ";
+				cin >> jugador2;
+
+				switch (jugador2)
+				{
+				case 1: case 2: case 3: case 4: case 5: {
+					isValid = true;
+					break;
+				}
+				default: {
+					cout << "\n\nJugada no valida para JUGADOR 2, intente nuevamente con una de las opciones posibles.";
+					break;
+
+				}
+				}
+			}
 
 			string resultado = juego.play(jugador1 - 1 , jugador2 - 1);
 

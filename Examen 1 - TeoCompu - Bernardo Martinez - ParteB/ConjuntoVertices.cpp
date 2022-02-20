@@ -79,7 +79,7 @@ void VertexSet::print() {
 		actual = actual->getNext();
 	} while (actual != first);
 
-	cout << "}";
+	cout << " }";
 }
 
 int VertexSet::size()
