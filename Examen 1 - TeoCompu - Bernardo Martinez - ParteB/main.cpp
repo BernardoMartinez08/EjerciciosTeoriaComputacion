@@ -4,6 +4,13 @@
 #include "Grafo.h"
 #include <fstream>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"      
+#define GREEN   "\033[32m"    
+#define YELLOW  "\033[33m"      
+#define BLUE    "\033[34m"      
+#define MAGENTA "\033[35m"  
+
 using namespace std;
 
 string importGraph() {
@@ -52,56 +59,63 @@ int main() {
 		switch (opcion)
 		{
 		case 1: {
-			cout << "\n\n********* P I E D R A,  P A P E L,  T I J E R A S,  L A G A R T I J A,  S P O C K *********\n";
+			int jugarDenuevo = 1;
 
-			cout << "\n\nInstrucciones: a continuacion se le pedira que seleccione la jugada para cada uno de los jugadores.\nSeleccione el numero que acompaña la opcion que desea seleccionar.";
-			cout << "\n\nOpciones a Jugar:\n" << opcionesJuego;
+			while (jugarDenuevo == 1) {
+				cout << "\n\n********* P I E D R A,  P A P E L,  T I J E R A S,  L A G A R T I J A,  S P O C K *********\n";
 
-			bool isValid = false;
+				cout << "\n\nInstrucciones: a continuacion se le pedira que seleccione la jugada para cada uno de los jugadores.\nSeleccione el numero que acompaña la opcion que desea seleccionar.";
+				cout << "\n\nOpciones a Jugar:\n" << RED << "\n\n1. Piedra." << YELLOW << "\n2. Papel." << MAGENTA << "\n3. Tijeras." << GREEN << "\n4. Lagartija." << BLUE << "\n5. Spock.\n\n" << RESET;
 
-			int jugador1;
-			while (isValid == false) {
-				cout << "\n\nIngrese la jugada del Jugador 1: ";
-				cin >> jugador1;
+				bool isValid = false;
 
-				switch (jugador1)
-				{
-				case 1: case 2: case 3: case 4: case 5: {
-					isValid = true;
-					break;
+				int jugador1;
+				while (isValid == false) {
+					cout << "\n\nIngrese la jugada del Jugador 1: ";
+					cin >> jugador1;
+
+					switch (jugador1)
+					{
+					case 1: case 2: case 3: case 4: case 5: {
+						isValid = true;
+						break;
+					}
+					default: {
+						cout << "\n\nJugada no valida para JUGADOR 1, intente nuevamente con una de las opciones posibles.";
+						break;
+
+					}
+					}
 				}
-				default: {
-					cout << "\n\nJugada no valida para JUGADOR 1, intente nuevamente con una de las opciones posibles.";
-					break;
 
+				isValid = false;
+				int jugador2;
+				while (isValid == false) {
+					cout << "\n\nIngrese la jugada del Jugador 2: ";
+					cin >> jugador2;
+
+					switch (jugador2)
+					{
+					case 1: case 2: case 3: case 4: case 5: {
+						isValid = true;
+						break;
+					}
+					default: {
+						cout << "\n\nJugada no valida para JUGADOR 2, intente nuevamente con una de las opciones posibles.";
+						break;
+
+					}
+					}
 				}
-				}
+
+				string resultado = juego.play(jugador1 - 1, jugador2 - 1);
+
+				cout << "\n\nEl resultado fue:\n\n" << resultado;
+				historial.push_back(resultado);
+
+				cout << "\n\nDesea jugar nuevamente\n1. Si.\n2. No.\nSeleccione una opcion: ";
+				cin >> jugarDenuevo;
 			}
-
-			isValid = false;
-			int jugador2;
-			while (isValid == false) {
-				cout << "\n\nIngrese la jugada del Jugador 2: ";
-				cin >> jugador2;
-
-				switch (jugador2)
-				{
-				case 1: case 2: case 3: case 4: case 5: {
-					isValid = true;
-					break;
-				}
-				default: {
-					cout << "\n\nJugada no valida para JUGADOR 2, intente nuevamente con una de las opciones posibles.";
-					break;
-
-				}
-				}
-			}
-
-			string resultado = juego.play(jugador1 - 1 , jugador2 - 1);
-
-			cout << "\n\nEl resultado fue:\n\n" << resultado;
-			historial.push_back(resultado);
 
 			break;
 
