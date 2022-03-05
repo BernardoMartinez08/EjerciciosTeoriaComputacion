@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Examen 1 - TeoCompu - Berna
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Examen 1 - TeoCompu - Bernardo Martinez - ParteB", "Examen 1 - TeoCompu - Bernardo Martinez - ParteB\Examen 1 - TeoCompu - Bernardo Martinez - ParteB.vcxproj", "{278E6657-6BFC-474C-A6BB-0CF0B585C3A9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProyectoGraficadorDeGrafos", "ProyectoGraficadorDeGrafos\ProyectoGraficadorDeGrafos.vcxproj", "{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{278E6657-6BFC-474C-A6BB-0CF0B585C3A9}.Release|x64.Build.0 = Release|x64
 		{278E6657-6BFC-474C-A6BB-0CF0B585C3A9}.Release|x86.ActiveCfg = Release|Win32
 		{278E6657-6BFC-474C-A6BB-0CF0B585C3A9}.Release|x86.Build.0 = Release|Win32
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Debug|x64.ActiveCfg = Debug|x64
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Debug|x64.Build.0 = Debug|x64
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Debug|x86.Build.0 = Debug|Win32
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Release|x64.ActiveCfg = Release|x64
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Release|x64.Build.0 = Release|x64
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Release|x86.ActiveCfg = Release|Win32
+		{977FE6B9-EF0D-4399-9343-0E73D1E4F6EE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
