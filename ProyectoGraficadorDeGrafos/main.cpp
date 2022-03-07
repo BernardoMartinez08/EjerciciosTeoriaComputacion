@@ -12,10 +12,10 @@ void menuSecundario(string _grafo, bool _dirigido) {
 
 	Graph grafo(_grafo, _dirigido);
 
-	while (opcion != 5) {
+	while (opcion != 6) {
 		cout << "\n\n\n********* M E N U  S E C U N D A R I O *********\n\n";
 
-		cout << "1.Mostar el grafo.\n2.Mostrar las Aristas de cada Vertice del Grafo.\n3.Etiquetar un Vertice.\n4.Obtener el grado de un Vertice.\n5.Salir.\n";
+		cout << "1.Mostar el grafo.\n2.Mostrar las Aristas de cada Vertice del Grafo.\n3.Etiquetar un Vertice.\n4.Obtener el grado de un Vertice.\n5.Verificar camino entre Vertices.\n6.Salir.\n";
 		cout << "Ingrese una opcion:";
 		cin >> opcion;
 
@@ -62,6 +62,19 @@ void menuSecundario(string _grafo, bool _dirigido) {
 			break;
 
 		}case 5: {
+			cout << "\n\n********* V E R I F I C A R  C A M I N O  E N T R E  V E R T I C E S *********\n";
+
+			string vertices;
+			cout << "\nIngrese los vertices del camino entre parentesis y separados por coma: ";
+			cin >> vertices;
+
+			if (grafo.verifyVertexWay(vertices))
+				cout << "\n\nSi existe un camino entre los vertices seleccionados.";
+			else
+				cout << "\n\nNo existe un camino entre los vertices seleccionados.";
+
+			break;
+		}case 6: {
 			cout << "\nSALIENDO AL MENU PRINCIPAL.....\n";
 
 			break;

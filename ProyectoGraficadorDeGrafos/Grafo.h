@@ -32,6 +32,10 @@ public:
 
 	int getVertexGrade(const char*);
 
+	bool verifyVertexWay(string);
+
+	bool getVertexCicle(const char*);
+
 private:
 	//string que almacena el grafo en formato de texto plano.
 	string rootGraph = "";
@@ -82,6 +86,11 @@ private:
 		a un formato diferente.
 	*/
 	bool validar();
+
+	bool vertexSimpleCicle(const char*);
+	bool vertexSeftCicle(const char*);
+
+	vector<string> convertToList(string);
 };
 
 #endif // !GRAFO_H

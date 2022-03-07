@@ -29,6 +29,12 @@ public:
 		Funcion que devuelve el apuntador a la primera arista del conjunto.
 	*/
 	Edge* getFirst();
+
+	/*
+		Funcion que nos devuelve si un par ordenado x,y esta incluido en el
+		conjunto de aristas.
+	*/
+	bool belong(const char*, const char*);
 private:
 	//Apuntador a la primer arista del conjunto.
 	Edge* first;
@@ -39,10 +45,5 @@ private:
 		Funcion que nos devulve si el conjunto esta vacio o no
 	*/
 	bool empty();
-	/*
-		Funcion que nos devuelve si un par ordenado x,y esta incluido en el
-		conjunto de aristas.
-	*/
-	bool belong(const char*, const char*);
 };
 #endif // ! ARISTAS_H

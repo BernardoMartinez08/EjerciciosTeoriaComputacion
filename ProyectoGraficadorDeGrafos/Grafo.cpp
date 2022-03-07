@@ -452,3 +452,60 @@ int Graph::getVertexGrade(const char* _valor) {
 		return grade;
 	}
 }
+
+
+vector<string> Graph::convertToList(string _expr) {
+	string campoAux = "";
+	vector<string> vertices;
+
+	auto toString = [](char a) {
+		string s(1, a);
+		return s;
+	};
+
+	if(toString(_expr[0]).compare("(") == 0)
+		_expr.erase(_expr.begin());
+
+	if(toString(_expr[_expr.size()-1]).compare(")") == 0)
+		_expr.erase(_expr.end());
+
+	for (int i = 0; i < _expr.size(); i++) {
+		if (i == _expr.size() - 1) {
+			campoAux += _expr[i];
+			vertices.push_back(campoAux);
+		}
+		else if (toString(_expr[i]).compare(",") != 0) {
+			campoAux += _expr[i];
+		}
+		else if (toString(_expr[i]).compare(",") == 0 && campoAux.compare("") != 0) {
+			vertices.push_back(campoAux);
+			campoAux = "";
+		}
+	}
+
+	return vertices;
+}
+
+
+bool Graph::verifyVertexWay(string _expr)
+{
+	vector<string> vertices = convertToList(_expr);
+	bool existWay = false;
+
+	auto toString = [](char a) {
+		string s(1, a);
+		return s;
+	};
+
+	for (int i = 0; i < vertices.size(); i++) {
+		if ((i + 1) < vertices.size()) {
+			if (edges->belong(vertices[i].c_str(), vertices[i + 1].c_str())) {
+ 				existWay = true;
+			}
+			else
+				return false;
+		}
+	}
+
+	return existWay;
+}

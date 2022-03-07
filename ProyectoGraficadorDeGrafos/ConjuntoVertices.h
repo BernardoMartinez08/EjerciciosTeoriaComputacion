@@ -37,6 +37,12 @@ public:
 		parametro el vertice a etiquetar y la etiqueta correspondiente.
 	*/
 	bool tag(const char*, const char*);
+
+	/*
+		Funcion que nos devuelve si un vertice esta incluido en el
+		conjunto de vertices.
+	*/
+	bool belong(const char*);
 private:
 	//Apuntador al primer vertice del conjunto.
 	Vertex* first;
@@ -47,10 +53,5 @@ private:
 		Funcion que nos devulve si el conjunto esta vacio o no.
 	*/
 	bool empty();
-	/*
-		Funcion que nos devuelve si un vertice esta incluido en el
-		conjunto de vertices.
-	*/
-	bool belong(const char*);
 };
 #endif // ! VERTICES_H
